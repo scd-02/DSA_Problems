@@ -1,4 +1,6 @@
-class Node {
+
+public class LL_ReverseALL {
+  static class Node {
   int data;
   Node next;
 
@@ -7,8 +9,6 @@ class Node {
     next = null;
   }
 }
-
-public class LL_ReverseALL {
   static Node reverse(Node head) {
 
     Node p = null;

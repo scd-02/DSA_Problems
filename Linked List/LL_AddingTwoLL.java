@@ -1,14 +1,14 @@
-class LL_Node {
-  int data;
-  LL_Node next;
-
-  LL_Node(int d) {
-    data = d;
-    next = null;
-  }
-}
-
 public class LL_AddingTwoLL {
+  static class LL_Node {
+    int data;
+    LL_Node next;
+
+    LL_Node(int d) {
+      data = d;
+      next = null;
+    }
+  }
+
   static LL_Node addTwoLists(LL_Node first, LL_Node second) {
 
     first = reverse(first);
