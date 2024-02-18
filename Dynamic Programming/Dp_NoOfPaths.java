@@ -1,7 +1,7 @@
 public class Dp_NoOfPaths {
   long mod = 1_000_000_000 + 7;
 
-  long numberOfPathsOptimized(int m, int n) {
+  long numberOfPathsOptimezed(int m, int n) {
 
     long mod = 1_000_000_007L;
 
