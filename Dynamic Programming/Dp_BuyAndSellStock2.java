@@ -112,8 +112,6 @@ public class Dp_BuyAndSellStock2 {
     for (int i = n - 1; i >= 0; i--) {
       for (int can_buy = 0; can_buy <= 1; can_buy++) {
 
-        int profit = 0;
-
         if (can_buy == 1) {
           int buy = -prices[i] + ahead[0];
           int not_buy = 0 + ahead[1];
