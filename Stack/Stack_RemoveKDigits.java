@@ -1,42 +1,40 @@
 import java.util.Stack;
 
 public class Stack_RemoveKDigits {
-  public String removeKdigits(String S, int k) {
+  public String removeKdigits(String num, int k) {
 
     Stack<Character> stk = new Stack<>();
 
-    for (int i = 0; i < S.length(); i++) {
+    for (char digit : num.toCharArray()) {
 
-      while (!stk.isEmpty() && stk.peek() > S.charAt(i) && k > 0) {
+      while (!stk.isEmpty() && k > 0 && stk.peek() > digit) {
         stk.pop();
         k--;
       }
 
-      stk.push(S.charAt(i));
+      stk.push(digit);
+
     }
 
-    while (k > 0) {
+    // post processing if k > 0 then remove digits from top of the stack
+    while (k > 0 && !stk.isEmpty()) {
       stk.pop();
       k--;
     }
 
-    if (stk.size() == 0) {
-      return "0";
-    }
-
-    StringBuilder res = new StringBuilder("");
-
+    // resulting string
+    StringBuilder ans = new StringBuilder();
     while (!stk.isEmpty()) {
-      res.append(stk.pop() + "");
+      ans.append(stk.pop());
     }
 
-    res = res.reverse();
+    ans.reverse();
 
-    int index = 0;
-    while (index < res.length() - 1 && res.charAt(index) == '0') {
-      index++;
+    // removing leading zeroes
+    while (ans.length() > 0 && ans.charAt(0) == '0') {
+      ans.deleteCharAt(0);
     }
 
-    return res.substring(index);
+    return ans.length() > 0 ? ans.toString() : "0";
   }
 }
