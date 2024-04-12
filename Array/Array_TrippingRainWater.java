@@ -24,4 +24,27 @@ public class Array_TrippingRainWater {
 
     return waterTrap;
   }
+
+  public int trap(int[] height) {
+    int n = height.length;
+
+    int water = 0;
+    int left = 0, right = n - 1;
+    int leftBar = height[0], rightBar = height[n - 1];
+
+    while (left < right) {
+
+      if (leftBar <= rightBar) {
+        water += leftBar - height[left];
+        left++;
+        leftBar = Math.max(leftBar, height[left]);
+      } else {
+        water += rightBar - height[right];
+        right--;
+        rightBar = Math.max(rightBar, height[right]);
+      }
+    }
+
+    return water;
+  }
 }
