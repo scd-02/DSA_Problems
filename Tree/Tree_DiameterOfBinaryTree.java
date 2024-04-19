@@ -1,4 +1,14 @@
 public class Tree_DiameterOfBinaryTree {
+  class Node {
+    int data;
+    Node left, right;
+
+    Node(int d) {
+      data = d;
+      left = right = null;
+    }
+  }
+
   int diameter(Node root) {
     int ans[] = new int[1];
 
