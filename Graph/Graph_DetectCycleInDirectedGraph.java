@@ -29,7 +29,7 @@ public class Graph_DetectCycleInDirectedGraph {
         if (dfs(v, visited, pathVisited, adj) == true)
           return true;
 
-      } else if (pathVisited[u] == true) {
+      } else if (pathVisited[v] == true) {
         return true;
       }
 
