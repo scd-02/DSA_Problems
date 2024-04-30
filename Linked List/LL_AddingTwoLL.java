@@ -1,63 +1,61 @@
 public class LL_AddingTwoLL {
-  static class LL_Node {
+  static class Node {
     int data;
-    LL_Node next;
+    Node next;
 
-    LL_Node(int d) {
+    Node(int d) {
       data = d;
       next = null;
     }
   }
 
-  static LL_Node addTwoLists(LL_Node first, LL_Node second) {
+  static Node addTwoLists(Node num1, Node num2) {
 
-    first = reverse(first);
-    second = reverse(second);
+    num1 = reverse(num1);
+    num2 = reverse(num2);
 
-    LL_Node ans = new LL_Node(0);
-    LL_Node curr = ans;
+    Node ans = new Node(0);
+    Node curr = ans;
     int carry = 0;
 
-    while (first != null || second != null || carry != 0) {
+    while (num1 != null || num2 != null || carry != 0) {
+      int a = num1 == null ? 0 : num1.data;
+      int b = num2 == null ? 0 : num2.data;
 
-      int digit1 = first == null ? 0 : first.data;
-      int digit2 = second == null ? 0 : second.data;
+      int sum = a + b + carry;
 
-      int sum = digit1 + digit2 + carry;
-
-      curr.next = new LL_Node(sum % 10);
+      curr.next = new Node(sum % 10);
       carry = sum / 10;
 
-      if (first != null)
-        first = first.next;
-      if (second != null)
-        second = second.next;
+      if (num1 != null)
+        num1 = num1.next;
+      if (num2 != null)
+        num2 = num2.next;
 
       curr = curr.next;
-
     }
 
     ans = ans.next;
     ans = reverse(ans);
 
-    return ans;
-
-  }
-
-  static LL_Node reverse(LL_Node head) {
-
-    LL_Node p = null;
-    LL_Node q = head, n = head;
-
-    while (q != null) {
-      n = n.next;
-
-      q.next = p;
-      p = q;
-      q = n;
-
+    while (ans != null && ans.data == 0) {
+      ans = ans.next;
     }
 
-    return p;
+    return ans == null ? new Node(0) : ans;
+  }
+
+  static Node reverse(Node head) {
+    Node prev = null, curr = head, next = head;
+
+    while (curr != null) {
+      next = next.next;
+
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+
+    return prev;
   }
 }
