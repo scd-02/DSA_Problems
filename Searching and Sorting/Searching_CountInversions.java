@@ -1,5 +1,12 @@
 public class Searching_CountInversions {
   static long inversionCount(long arr[], long N) {
+    /*
+     * applying the concept of merge sort to find no of inversions
+     * divide the array into two halves recursively and
+     * while merging two sorted array check
+     * if any element from right sorted array is less than left sorted array
+     * then no of inversions is (size of left array - current index of array)
+     */
     return mergeSort(arr, 0, (int) N - 1);
   }
 
