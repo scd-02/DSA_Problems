@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * o/P: 2 1 3 4 
  */
 
-public class Tree_NormalBSTToBalancedBST {
+public class BST_NormalBSTToBalancedBST {
 
   Node buildBalancedTree(Node root) {
     ArrayList<Integer> list = new ArrayList<>();
