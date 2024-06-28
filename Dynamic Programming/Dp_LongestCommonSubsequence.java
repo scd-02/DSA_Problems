@@ -1,38 +1,70 @@
 public class Dp_LongestCommonSubsequence {
 
-  static int lcs(int x, int y, String s1, String s2) {
-    int state[][] = new int[x + 1][y + 1];
+  public int longestCommonSubsequence(String text1, String text2) {
 
-    for (int i = 0; i < state.length; i++) {
-      for (int j = 0; j < state[i].length; j++) {
+    int n = text1.length();
+    int m = text2.length();
 
-        if (i == 0 || j == 0) {
-          state[i][j] = 0;
-          continue;
-        }
+    // int dp[][] = new int[n + 1][m + 1];
+    // for(int i = 0; i < dp.length; i++){
+    // Arrays.fill(dp[i], -1);
+    // }
 
-        if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-          state[i][j] = 1 + state[i - 1][j - 1];
-        } else {
-          state[i][j] = Math.max(state[i][j - 1], state[i - 1][j]);
-        }
+    // return mem(text1, n, text2, m, dp);
+
+    // return tab(text1, n, text2, m);
+    return so(text1, n, text2, m);
+  }
+
+  int so(String text1, int n, String text2, int m) {
+    int prev[] = new int[m + 1];
+
+    // base case handled as initialization of array is 0;
+
+    for (int i = 1; i <= n; i++) {
+      int curr[] = new int[m + 1];
+      for (int j = 1; j <= m; j++) {
+
+        if (text1.charAt(i - 1) == text2.charAt(j - 1))
+          curr[j] = 1 + prev[j - 1];
+        else
+          curr[j] = 0 + Math.max(prev[j], curr[j - 1]);
+      }
+      prev = curr;
+    }
+
+    return prev[m];
+  }
+
+  int tab(String text1, int n, String text2, int m) {
+    int dp[][] = new int[n + 1][m + 1];
+
+    // base case handled as initialization of array is 0;
+
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= m; j++) {
+
+        if (text1.charAt(i - 1) == text2.charAt(j - 1))
+          dp[i][j] = 1 + dp[i - 1][j - 1];
+        else
+          dp[i][j] = 0 + Math.max(dp[i - 1][j], dp[i][j - 1]);
       }
     }
 
-    return state[x][y];
+    return dp[n][m];
   }
 
-  static int lcsRec(int x, int y, String s1, String s2) {
+  int mem(String text1, int i, String text2, int j, int dp[][]) {
 
-    if (x == 0 || y == 0) {
+    if (i == 0 || j == 0)
       return 0;
-    }
 
-    if (s1.charAt(x - 1) == s2.charAt(y - 1)) {
-      return 1 + lcsRec(x - 1, y - 1, s1, s2);
-    }
+    if (dp[i][j] != -1)
+      return dp[i][j];
 
-    return Math.max(lcsRec(x, y - 1, s1, s2), lcsRec(x - 1, y, s1, s2));
+    if (text1.charAt(i - 1) == text2.charAt(j - 1))
+      return dp[i][j] = 1 + mem(text1, i - 1, text2, j - 1, dp);
 
+    return dp[i][j] = 0 + Math.max(mem(text1, i - 1, text2, j, dp), mem(text1, i, text2, j - 1, dp));
   }
 }
