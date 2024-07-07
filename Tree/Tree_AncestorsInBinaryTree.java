@@ -1,33 +1,52 @@
 import java.util.ArrayList;
 
+/**
+ * This class represents a binary tree and provides a method to find the ancestors of a given target node in the tree.
+ */
 public class Tree_AncestorsInBinaryTree {
-  /*
-   * i/p: 1 2 3 4 5 6 8 7; target = 6
-   * o/p: 3 1
+
+  /**
+   * Finds the ancestors of a given target node in the binary tree.
+   *
+   * @param root   The root node of the binary tree.
+   * @param target The value of the target node.
+   * @return An ArrayList containing the ancestors of the target node in the binary tree.
    */
-  public static ArrayList<Integer> Ancestors(Node root, int target) {
-    ArrayList<Integer> list = new ArrayList<>();
-    solve(list, root, target);
-    return list;
+  public ArrayList<Integer> Ancestors(Node root, int target) {
+
+    ArrayList<Integer> ans = new ArrayList<>();
+    findAncestors(root, target, ans);
+    return ans;
+
   }
 
-  static int solve(ArrayList<Integer> list, Node root, int target) {
+  /**
+   * Recursive helper method to find the ancestors of a given target node in the binary tree.
+   *
+   * @param root   The current node being traversed.
+   * @param target The value of the target node.
+   * @param ans    The ArrayList to store the ancestors of the target node.
+   * @return True if the target node is found, false otherwise.
+   */
+  boolean findAncestors(Node root, int target, ArrayList<Integer> ans) {
+
     if (root == null)
-      return -1;
+      return false;
+
     if (root.data == target)
-      return 0;
+      return true;
 
-    if (solve(list, root.left, target) == 0) {
-      list.add(root.data);
-      return 0;
+    if (findAncestors(root.left, target, ans)) {
+      ans.add(root.data);
+      return true;
     }
 
-    if (solve(list, root.right, target) == 0) {
-      list.add(root.data);
-      return 0;
+    if (findAncestors(root.right, target, ans)) {
+      ans.add(root.data);
+      return true;
     }
 
-    return -1;
+    return false;
 
   }
 }
