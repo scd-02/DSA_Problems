@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -33,12 +34,21 @@ public class Graph_AlienDictionary {
     }
 
     ArrayList<Integer> topo = new ArrayList<>();
-
+    HashSet<Integer> hs = new HashSet<>();
     topoSort(K, adj, topo);
 
     String order = "";
     for (int e : topo) {
       order += (char) (e + (int) 'a');
+    }
+
+    // some edge cases where the order is not complete
+    if (order.length() < K) {
+      for (int i = 0; i < K; i++) {
+        if (!hs.contains(i)) {
+          order += (char) (i + (int) 'a');
+        }
+      }
     }
 
     return order;
