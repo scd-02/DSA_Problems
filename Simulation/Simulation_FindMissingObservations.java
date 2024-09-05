@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Simulation_FindMissingObservations {
   public int[] missingRolls(int[] rolls, int mean, int n) {
 
